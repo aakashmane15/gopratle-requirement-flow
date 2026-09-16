@@ -8,7 +8,7 @@ const requirementSchema = new Schema({
   eventType: { type: String, required: true },
   isDateRange: { type: Boolean, default: false },
   startDate: { type: Date, required: true },
-  endDate: { type: String, required: true },
+  endDate: { type: Date, required: true },
   location: { type: String, required: true },
   venue: { type: String, default: "" },
 
