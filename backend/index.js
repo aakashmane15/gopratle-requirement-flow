@@ -12,10 +12,18 @@ const requirementRouter = require("./routes/requirements");
 const app = express();
 
 app.use(cors());
-app.use(express.json);
+app.use(express.json());
+
+// Testing
+app.use((req, res, next) => {
+  console.log("Incoming request:", req.method, req.url);
+  next();
+});
 
 // health endpoint
 app.get("/", (req, res) => {
+  console.log("Health endpoint reached");
+
   res.json({ status: "ok", service: "GoPratle requirements API" });
 });
 
@@ -32,4 +40,7 @@ async function main() {
   });
 }
 
-main();
+main().catch((err) => {
+  console.error("Failed to start server:", err);
+  process.exit(1);
+});

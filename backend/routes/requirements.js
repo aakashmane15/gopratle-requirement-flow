@@ -6,7 +6,14 @@ const router = express.Router();
 
 // POST /api/requirements - create a new requirement
 router.post("/", async (req, res) => {
+  // Testing
+  console.log("POST /api/requirements received");
+
   const parsed = requirementSchema.safeParse(req.body);
+
+  //Testing
+  console.log("Validation completed");
+  console.log("Attempting to save requirement");
 
   if (!parsed.success) {
     return res.status(400).json({
@@ -29,6 +36,9 @@ router.post("/", async (req, res) => {
       details: data.details,
     });
 
+    // Testing
+    console.log("Requirement saved:", requirement._id);
+
     res.status(201).json({
       message: "Requirement posted successfully",
       requirementId: requirement._id,
@@ -44,13 +54,14 @@ router.post("/", async (req, res) => {
 });
 
 // GET /api/requirements - get all requirements with newest first order
-router.get("/", async (req, res) => {
+router.get("/:category", async (req, res) => {
   const { category } = req.params;
+
   const allowed = ["planner", "performer", "crew"];
 
   if (!allowed.includes(category)) {
     return res.status(400).json({
-      message: "Invalide category",
+      message: "Invalid category",
     });
   }
 
@@ -58,10 +69,18 @@ router.get("/", async (req, res) => {
     const requirements = await Requirement.find({ category }).sort({
       createdAt: -1,
     });
-    res.json({ category, count: requirements.length, requirements });
+
+    res.json({
+      category,
+      count: requirements.length,
+      requirements,
+    });
   } catch (err) {
     console.error("Failed to fetch requirements:", err);
-    res.status(500).json({ message: "Something went wrong while fetching" });
+
+    res.status(500).json({
+      message: "Something went wrong while fetching",
+    });
   }
 });
 
