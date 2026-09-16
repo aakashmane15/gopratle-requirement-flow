@@ -1,0 +1,31 @@
+export const detailDefaults = {
+  planner: {
+    servicesNeeded: [],
+    expectedGuests: "",
+    budgetRange: "",
+    planningStartsFrom: "",
+    onSiteCoordination: false,
+    experienceRequired: "",
+    notes: "",
+  },
+  performer: {
+    performanceType: "",
+    genre: "",
+    teamSize: "",
+    languages: [],
+    durationMinutes: "",
+    equipmentProvidedBy: "",
+    budgetRange: "",
+    notes: "",
+  },
+  crew: {
+    rolesNeeded: [],
+    headcount: "",
+    experienceLevel: "",
+    callTime: "",
+    wrapTime: "",
+    equipmentProvided: false,
+    payPerPerson: "",
+    notes: "",
+  },
+};
